@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using Kwanso.MVC.Models;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace Kwanso.MVC.Data
 {
@@ -14,6 +9,6 @@ namespace Kwanso.MVC.Data
         {
         }
 
-        public DbSet<Kwanso.MVC.Models.Login> Login { get; set; }
+        public DbSet<Models.Login> Login { get; set; }
     }
 }

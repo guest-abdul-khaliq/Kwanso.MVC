@@ -7,8 +7,6 @@ using Newtonsoft.Json;
 using RestSharp;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
@@ -33,9 +31,9 @@ namespace Kwanso.MVC.Controllers
             try
             {
                 if (string.IsNullOrEmpty(HttpContext.Session.GetString("JWTtoken")))
-                    return RedirectToAction("Login","Account");
+                    return RedirectToAction("Login", "Account");
                 List<Tasks> taskList = new List<Tasks>();
-                
+
                 using (var httpClient = new HttpClient())
                 {
                     httpClient.BaseAddress = new Uri(_configuration["BaseUrl"]);
@@ -48,7 +46,7 @@ namespace Kwanso.MVC.Controllers
                         apiResponse = apiResponse.TrimEnd('\"');
                         apiResponse = apiResponse.Replace("\\", "");
                         taskList = JsonConvert.DeserializeObject<List<Tasks>>(apiResponse);
-                        
+
                     }
                 }
                 return View(taskList);
@@ -131,15 +129,6 @@ namespace Kwanso.MVC.Controllers
         {
             using (var httpClient = new HttpClient())
             {
-                //httpClient.BaseAddress = new Uri(_configuration["BaseUrl"]);
-                //httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                //httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("JWTtoken").Replace("\"", ""));
-
-                //HttpResponseMessage response123 = httpClient.PostAsync("/create-task", new StringContent(JsonConvert.SerializeObject(ids), System.Text.Encoding.UTF8, "application/json")).Result;
-                //string stringJWT = response123.Content.ReadAsStringAsync().Result;
-
-                /////////////////////////////////////////////////////////////////////////
-
                 var client = new RestClient("https://localhost:44302/bulk-delete?ids=" + HttpUtility.UrlEncode(ids));
                 client.Timeout = -1;
                 var request = new RestRequest(Method.POST);
@@ -148,11 +137,7 @@ namespace Kwanso.MVC.Controllers
                 request.AddParameter("text/plain", body, ParameterType.RequestBody);
                 IRestResponse response = client.Execute(request);
             }
-
-
             return RedirectToAction("Index", "Tasks");
         }
-
-
     }
 }

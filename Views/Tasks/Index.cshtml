@@ -13,11 +13,6 @@
     <div class="col-sm-2">
         @Html.ActionLink("Bulk Delete", "Delete", "Tasks", null, new { @class = "btn btn-info" })
     </div>
-
-    @*<div class="col-sm-2">
-
-            <button type="button" id="btnDelete" style="display:none" class="btn btn-danger">Delete</button>
-        </div>*@
 </div>
 
 <hr />
@@ -25,13 +20,6 @@
     @foreach (var item in Model)
     {
         <div class="col-sm-3" style="margin: 0 0 10px 0px;">
-            @*<div class="card-header">
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="@(@item.Id)">
-                    <label class="form-check-label" for="exampleCheck1">Check me out for delete</label>
-                </div>
-            </div>*@
-
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Id: @item.Id</h5>
@@ -42,65 +30,3 @@
         </div>
     }
 </div>
-@*<script type="text/javascript">
-    $(document).ready(function () {
-        var valuesArray = "";
-        debugger;
-        CheckVisibility();
-        $(".form-check-input").change(function () {
-            if (this.checked) {
-                debugger;
-                valuesArray = $('input:checkbox:checked').map(function () {
-                    return this.id;
-                }).get().join(",");
-            }
-            else {
-                //var str = document.getElementById("strArray").innerHTML;
-                var strArray = valuesArray.split(',');
-                for (var i = 0; i < strArray.length; i++) {
-                    if (strArray[i] === this.id) {
-                        strArray.splice(i, 1);
-                    }
-                }
-                valuesArray = strArray.toString();
-            }
-            CheckVisibility();
-        });
-
-        function CheckVisibility() {
-            if (!valuesArray) {
-                $("#btnDelete").css("display", "none");
-            }
-            else {
-                $("#btnDelete").css("display", "block");
-            }
-        }
-
-        $(function () {
-            $('#btnDelete').click(function () {
-                Deletetasks();
-            });
-        });
-
-        function Deletetasks() {
-            $.ajax({
-                dataType: "Html",
-                type: "POST",
-                url: '@Url.Action("Delete", "tasks")',
-                data: { ids: valuesArray },
-                success: function (a) {
-                    // Replace the div's content with the page method's return.
-                    alert("success");
-                    //$('#baitetstiq').html(a);
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    alert(errorThrown)
-                }
-            });
-        }
-
-
-
-    });
-</script>*@
-
